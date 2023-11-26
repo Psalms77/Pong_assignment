@@ -1,17 +1,24 @@
 #include "Engine.h"
 //	init
 void Engine::initVariables() {
+
 	// init basic
 	dt = 0.f;
+
 
 	this->window = nullptr;
 }
 void Engine::initWindow() {
+
+
+
 	this->window = new sf::RenderWindow(sf::VideoMode(1600, 900), "PONG");
+
+
 }
 
 
-
+// constructor/destructor
 Engine::Engine() {
 	this->initVariables();
 	this->initWindow();
