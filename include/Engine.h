@@ -7,7 +7,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
-
+#include <Ball.h>
+#include <Paddle.h>
 
 class Engine
 {
@@ -16,6 +17,8 @@ private:
 
 	sf::Vector2i mousePosScreen;
 	sf::Vector2i mousePosWindow;
+
+	Ball ball;
 
 	float dt;
 	sf::Clock dtClock;

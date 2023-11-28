@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PlayerPaddle.cpp" />
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="include\Engine.h" />
     <ClInclude Include="include\Paddle.h" />
     <ClInclude Include="include\UIClass.h" />
+    <ClInclude Include="PlayerPaddle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,6 +7,10 @@
 #include <string>
 #include <vector>
 #include <fstream>
+
+
+
+
 class Ball
 {
 
@@ -29,6 +33,8 @@ class Ball
 		//accessors
 		const sf::FloatRect getBounds() const;
 		const sf::Vector2f& getPos() const;
+
+
 
 		//functions
 		void update();

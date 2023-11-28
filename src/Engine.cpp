@@ -1,10 +1,10 @@
 #include "Engine.h"
+
 //	init
 void Engine::initVariables() {
 
 	// init basic
 	dt = 0.f;
-
 
 	this->window = nullptr;
 }
@@ -61,6 +61,7 @@ void Engine::update() {
 
 	dt = dtClock.restart().asSeconds();
 
+	//ball.update();
 
 	this->pollEvents();
 
@@ -72,6 +73,7 @@ void Engine::update() {
 void Engine::render() {
 	// render
 	this->window->clear();
+	this->ball.render(this->window);
 
 	this->window->display();
 
