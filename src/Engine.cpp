@@ -17,6 +17,13 @@ void Engine::initWindow() {
 
 }
 
+bool Engine::paddleBallCollision(const sf::CircleShape& ball, const sf::RectangleShape& paddle)
+{
+	sf::FloatRect ballBounds = ball.getGlobalBounds();
+	sf::FloatRect paddleBounds = paddle.getGlobalBounds();
+	return ballBounds.intersects(paddleBounds);
+}
+
 
 // constructor/destructor
 Engine::Engine() {
@@ -62,7 +69,14 @@ void Engine::update() {
 	dt = dtClock.restart().asSeconds();
 
 	this->pollEvents();
+
 	this->playerPaddle_1.update(this->window);
+	this->ball.update(this->window);
+	if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape))
+	{
+		this->ball.direction.x = -this->ball.direction.x;
+	}
+
 
 
 }
@@ -73,7 +87,7 @@ void Engine::render() {
 	// render
 	this->window->clear();
 	this->playerPaddle_1.render(this->window);
-
+	this->ball.render(this->window);
 	this->window->display();
 
 

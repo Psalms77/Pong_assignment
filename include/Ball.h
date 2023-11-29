@@ -16,9 +16,7 @@ class Ball
 
 
 	private:
-	//variables
-	sf::CircleShape shape;
-	sf::Vector2f direction;
+
 	
 	//private functions
 	void initVariables();
@@ -27,8 +25,11 @@ class Ball
 
 
 	public:
+		//variables
+		sf::CircleShape shape;
+		sf::Vector2f direction;
 		float movementSpeed;
-		Ball(float x, float y);
+		Ball(float x = 400, float y = 300);
 		virtual ~Ball();
 
 

@@ -12,9 +12,7 @@ class PlayerPaddle
 
 private:
 
-	sf::RectangleShape shape;
 
-	float movementSpeed;
 
 	void initVariables();
 	void initShape(float x, float y);
@@ -23,6 +21,10 @@ private:
 
 
 public:
+	sf::RectangleShape shape;
+
+	float movementSpeed;
+
 	PlayerPaddle(float x = 40.f, float y = 200.f);
 	virtual ~PlayerPaddle();
 

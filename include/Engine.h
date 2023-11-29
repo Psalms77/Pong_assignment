@@ -22,7 +22,7 @@ private:
 	//game objects
 
 	PlayerPaddle playerPaddle_1;
-	
+	Ball ball;
 
 	// clock
 	float dt;
@@ -36,7 +36,7 @@ private:
 	// private functions
 	void initVariables();
 	void initWindow();
-
+	bool paddleBallCollision(const sf::CircleShape& ball, const sf::RectangleShape& paddle);
 
 
 public:
