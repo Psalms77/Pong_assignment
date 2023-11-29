@@ -10,6 +10,7 @@
 #include <Ball.h>
 #include <Paddle.h>
 #include <PlayerPaddle.h>
+#include <PaddleAI.h>
 
 class Engine
 {
@@ -22,6 +23,7 @@ private:
 	//game objects
 
 	PlayerPaddle playerPaddle_1;
+	PaddleAI paddleAI;
 	Ball ball;
 
 	// clock

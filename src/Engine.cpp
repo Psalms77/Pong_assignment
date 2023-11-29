@@ -71,10 +71,12 @@ void Engine::update() {
 	this->pollEvents();
 
 	this->playerPaddle_1.update(this->window);
+	this->paddleAI.update(this->window, this->ball.shape);
 	this->ball.update(this->window);
-	if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape))
+	if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->paddleAI.shape))
 	{
 		this->ball.direction.x = -this->ball.direction.x;
+		this->ball.movementSpeed += 0.1f;
 	}
 
 
@@ -87,6 +89,7 @@ void Engine::render() {
 	// render
 	this->window->clear();
 	this->playerPaddle_1.render(this->window);
+	this->paddleAI.render(this->window);
 	this->ball.render(this->window);
 	this->window->display();
 
