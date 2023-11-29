@@ -12,8 +12,8 @@ void Engine::initWindow() {
 
 
 
-	this->window = new sf::RenderWindow(sf::VideoMode(1600, 900), "PONG");
-
+	this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "PONG");
+	this->window->setFramerateLimit(60);
 
 }
 
@@ -61,9 +61,8 @@ void Engine::update() {
 
 	dt = dtClock.restart().asSeconds();
 
-	//ball.update();
-
 	this->pollEvents();
+	this->playerPaddle_1.update(this->window);
 
 
 }
@@ -73,7 +72,7 @@ void Engine::update() {
 void Engine::render() {
 	// render
 	this->window->clear();
-	this->ball.render(this->window);
+	this->playerPaddle_1.render(this->window);
 
 	this->window->display();
 

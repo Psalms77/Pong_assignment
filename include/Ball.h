@@ -30,14 +30,10 @@ class Ball
 		Ball(float x, float y);
 		virtual ~Ball();
 
-		//accessors
-		const sf::FloatRect getBounds() const;
-		const sf::Vector2f& getPos() const;
-
 
 
 		//functions
-		void update();
+		void update(sf::RenderTarget* target);
 		void render(sf::RenderTarget* target);
 };
 

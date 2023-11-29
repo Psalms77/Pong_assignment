@@ -9,6 +9,7 @@
 #include <fstream>
 #include <Ball.h>
 #include <Paddle.h>
+#include <PlayerPaddle.h>
 
 class Engine
 {
@@ -17,12 +18,16 @@ private:
 
 	sf::Vector2i mousePosScreen;
 	sf::Vector2i mousePosWindow;
+	sf::Font font;
+	//game objects
 
-	Ball ball;
+	PlayerPaddle playerPaddle_1;
+	
 
+	// clock
 	float dt;
 	sf::Clock dtClock;
-	sf::Font font;
+
 
 
 	//window

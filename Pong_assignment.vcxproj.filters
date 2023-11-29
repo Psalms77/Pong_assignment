@@ -30,7 +30,7 @@
     <ClCompile Include="src\UIClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerPaddle.cpp">
+    <ClCompile Include="src\PlayerPaddle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClInclude Include="include\UIClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerPaddle.h">
+    <ClInclude Include="include\PlayerPaddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

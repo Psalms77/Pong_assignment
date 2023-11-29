@@ -5,19 +5,19 @@
 
 void Ball::initVariables() {
 	// properties
-	this->movementSpeed = 1.f;
+	this->movementSpeed = 5.f;
 
 }
 
 
 void Ball::initShape() {
-	this->shape.setRadius(10.f);
+	this->shape.setRadius(30.f);
 	this->shape.setFillColor(sf::Color::White);
-	this->shape.setOutlineColor(sf::Color::Black);
+	this->shape.setOutlineColor(sf::Color::Green);
 	this->shape.setOutlineThickness(1.f);
 }
 
-
+// constructors/destructors
 
 Ball::Ball(float x, float y) {
 	this->initVariables();
@@ -28,25 +28,16 @@ Ball::Ball(float x, float y) {
 
 Ball::~Ball() {
 
+
 }
 
-
-// accessors
-
-const sf::FloatRect Ball::getBounds() const {
-	return this->shape.getGlobalBounds();
-}
-
-const sf::Vector2f& Ball::getPos() const {
-	return this->shape.getPosition();
-}
 
 
 // functions
 
-void Ball::update() {
+void Ball::update(sf::RenderTarget* target) {
 	// move
-	this->shape.move(this->movementSpeed, 0.f);
+
 }
 
 void Ball::render(sf::RenderTarget* target) {
