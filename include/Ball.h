@@ -19,7 +19,7 @@ class Ball
 	//variables
 	sf::CircleShape shape;
 	sf::Vector2f direction;
-	float movementSpeed;
+	
 	//private functions
 	void initVariables();
 	void initShape();
@@ -27,13 +27,15 @@ class Ball
 
 
 	public:
+		float movementSpeed;
 		Ball(float x, float y);
 		virtual ~Ball();
 
 
 
 		//functions
-		void update(sf::RenderTarget* target);
+		void updatewindowboundscollision(const sf::RenderTarget* target);
+		void update(const sf::RenderTarget* target);
 		void render(sf::RenderTarget* target);
 };
 

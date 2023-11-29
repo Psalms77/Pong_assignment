@@ -6,7 +6,7 @@
 void Ball::initVariables() {
 	// properties
 	this->movementSpeed = 5.f;
-
+	this->direction = sf::Vector2f(1.f, 0.f);
 }
 
 
@@ -35,8 +35,23 @@ Ball::~Ball() {
 
 // functions
 
-void Ball::update(sf::RenderTarget* target) {
+void Ball::updatewindowboundscollision(const sf::RenderTarget* target)
+{
+
+
+
+}
+
+void Ball::update(const sf::RenderTarget* target) {
+
+	this->updatewindowboundscollision(target);
+
+
+
 	// move
+
+
+
 
 }
 
