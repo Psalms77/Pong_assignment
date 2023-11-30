@@ -36,6 +36,9 @@
     <ClCompile Include="src\PaddleAI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PlayerPaddle_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Ball.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\PaddleAI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerPaddle_2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -28,7 +28,7 @@ public:
 	PlayerPaddle(float x = 40.f, float y = 200.f);
 	virtual ~PlayerPaddle();
 
-	void updateInput();
+	virtual void updateInput();
 	void updateboundscollision(const sf::RenderTarget* target);
 	void update(const sf::RenderTarget* target);
 	void render(sf::RenderTarget* target);
