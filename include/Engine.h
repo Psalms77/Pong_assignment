@@ -32,6 +32,8 @@ private:
 	float dt;
 	sf::Clock dtClock;
 
+	// ui
+
 
 
 	//window

@@ -13,27 +13,27 @@ class UIClass
 
 	private:
 	//variables
-	sf::RectangleShape shape;
+    // start scene
 	sf::Font font;
-	sf::Text text;
-	sf::Vector2f direction;
-	float movementSpeed;
+	sf::Text title;
+	sf::Text onePlayer;
+	sf::Text twoPlayer;
+	//game scene
+	sf::Text p1score;
+	sf::Text p2score;
+	sf::Text buttonhints;
+
+
 	//private functions
-	void initVariables();
-	void initShape();
 	void initText();
 
 
 	public:
-		UIClass(float x, float y, std::string text);
+		UIClass();
 		virtual ~UIClass();
 
-		//accessors
-		const sf::FloatRect getBounds() const;
-		const sf::Vector2f& getPos() const;
-
 		//functions
-		void update();
+		void update(sf::RenderTarget* target);
 		void render(sf::RenderTarget* target);
 
 
