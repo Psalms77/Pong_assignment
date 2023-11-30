@@ -2,7 +2,7 @@
 
 void PaddleAI::initVariables()
 {
-	this->movementSpeed = 300.f;
+	this->movementSpeed = 200.f;
 	this->decisionTime = 5.f;
 	this->timer = 0.f;
 }
@@ -26,6 +26,11 @@ PaddleAI::~PaddleAI()
 
 }
 
+float PaddleAI::generateRandomFloat(float min, float max) {
+	// Generate random float value within the specified range
+	return min + static_cast<float>(std::rand()) / (static_cast<float>(RAND_MAX / (max - min)));
+}
+
 void PaddleAI::update(const sf::RenderTarget* target, const sf::CircleShape ball, float dt)
 {
 	// behaviour counter
@@ -38,11 +43,11 @@ void PaddleAI::update(const sf::RenderTarget* target, const sf::CircleShape ball
 		this->rng = rand() % 10 + 1;
 		if (rng > 3)
 		{
-			this->movementSpeed = 300.f;
+			this->movementSpeed = this->generateRandomFloat(150.f, 250.f);
 		}
 		else
 		{
-			this->movementSpeed = 70.f;
+			this->movementSpeed = this->generateRandomFloat(50.f, 80.f);
 		}
 		this->timer = 0.f;
 	}

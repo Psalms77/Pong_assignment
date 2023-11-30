@@ -12,6 +12,7 @@
 #include <PlayerPaddle.h>
 #include <PaddleAI.h>
 #include <PlayerPaddle_2.h>
+#include <UIClass.h>
 
 class Engine
 {
@@ -20,6 +21,11 @@ private:
 
 	sf::Vector2i mousePosScreen;
 	sf::Vector2i mousePosWindow;
+
+	bool isSinglePlayer;
+	bool isMultiPlayer;
+	bool isStartScene;
+
 	sf::Font font;
 	//game objects
 
@@ -33,7 +39,7 @@ private:
 	sf::Clock dtClock;
 
 	// ui
-
+	UIClass ui;
 
 
 	//window

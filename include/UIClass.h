@@ -25,7 +25,7 @@ class UIClass
 
 
 	//private functions
-	void initText();
+	void initVariables();
 
 
 	public:
@@ -33,8 +33,8 @@ class UIClass
 		virtual ~UIClass();
 
 		//functions
-		void update(sf::RenderTarget* target);
-		void render(sf::RenderTarget* target);
+		void update(sf::RenderTarget* target, int p1, int p2);
+		void render(sf::RenderTarget* target, int i);
 
 
 };

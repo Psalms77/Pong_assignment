@@ -26,7 +26,7 @@ public:
 
 	PaddleAI(float x = 740.f, float y = 200.f);
 	virtual ~PaddleAI();
-
+	float generateRandomFloat(float min, float max);
 	void update(const sf::RenderTarget* target, const sf::CircleShape ball, float dt);
 	void render(sf::RenderTarget* target);
 

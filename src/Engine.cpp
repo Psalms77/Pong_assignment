@@ -5,6 +5,9 @@ void Engine::initVariables() {
 
 	// init basic
 	dt = 0.f;
+	this->isSinglePlayer = false;
+	this->isMultiPlayer = false;
+	this->isStartScene = true;
 
 	this->window = nullptr;
 }
@@ -69,19 +72,45 @@ void Engine::update() {
 	dt = dtClock.restart().asSeconds();
 
 	this->pollEvents();
-
-	this->playerPaddle_1.update(this->window);
-	this->playerPaddle_2.update(this->window);
-	//this->paddleAI.update(this->window, this->ball.shape, dt);
-	this->ball.update(this->window);
-	if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->paddleAI.shape) || this->paddleBallCollision(this->ball.shape, this->playerPaddle_2.shape))
+	
+	if (isStartScene)
 	{
-		this->ball.direction.x = -this->ball.direction.x;
-		this->ball.movementSpeed += 0.25f;
+		//this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+		{
+			isStartScene = false;
+			isSinglePlayer = true;
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+		{
+			isStartScene = false;
+			isMultiPlayer = true;
+		}
 	}
-
-
-
+	else if (isSinglePlayer)
+	{
+		this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
+		this->playerPaddle_1.update(this->window);
+		this->paddleAI.update(this->window, this->ball.shape, dt);
+		this->ball.update(this->window);
+		if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->paddleAI.shape))
+		{
+			this->ball.direction.x = -this->ball.direction.x;
+			this->ball.movementSpeed += 0.25f;
+		}
+	}
+	else if (isMultiPlayer)
+	{
+		this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
+		this->playerPaddle_1.update(this->window);
+		this->playerPaddle_2.update(this->window);
+		this->ball.update(this->window);
+		if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->playerPaddle_2.shape))
+		{
+			this->ball.direction.x = -this->ball.direction.x;
+			this->ball.movementSpeed += 0.25f;
+		}
+	}
 }
 
 
@@ -89,10 +118,25 @@ void Engine::update() {
 void Engine::render() {
 	// render
 	this->window->clear();
-	this->playerPaddle_1.render(this->window);
-	this->playerPaddle_2.render(this->window);
-	//this->paddleAI.render(this->window);
-	this->ball.render(this->window);
+	
+	if (isStartScene)
+	{
+		this->ui.render(this->window, 0);
+	}
+	else if (isSinglePlayer)
+	{
+		this->ui.render(this->window, 1);
+		this->playerPaddle_1.render(this->window);
+		this->paddleAI.render(this->window);
+		this->ball.render(this->window);
+	}
+	else if (isMultiPlayer)
+	{
+		this->ui.render(this->window, 2);
+		this->playerPaddle_1.render(this->window);
+		this->playerPaddle_2.render(this->window);
+		this->ball.render(this->window);
+	}
 	this->window->display();
 
 
