@@ -91,6 +91,7 @@ void Engine::update() {
 
 	this->pollEvents();
 
+	// main game logic
 	if (isStartScene)
 	{
 		//this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
@@ -129,6 +130,7 @@ void Engine::update() {
 			this->ball.movementSpeed += 0.25f;
 		}
 	}
+
 }
 
 
@@ -137,6 +139,8 @@ void Engine::render() {
 	// render
 	this->window->clear();
 	
+
+	// main render logic
 	if (isStartScene)
 	{
 		this->ui.render(this->window, 0);
