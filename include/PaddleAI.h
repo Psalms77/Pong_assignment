@@ -11,7 +11,9 @@ class PaddleAI
 {
 private:
 
-
+	int rng;
+	float timer;
+	float decisionTime;
 	void initVariables();
 	void initShape(float x, float y);
 
@@ -25,7 +27,7 @@ public:
 	PaddleAI(float x = 740.f, float y = 200.f);
 	virtual ~PaddleAI();
 
-	void update(const sf::RenderTarget* target, const sf::CircleShape ball);
+	void update(const sf::RenderTarget* target, const sf::CircleShape ball, float dt);
 	void render(sf::RenderTarget* target);
 
 

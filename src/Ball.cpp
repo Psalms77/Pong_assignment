@@ -2,11 +2,11 @@
 
 
 
-
 void Ball::initVariables() {
 	// properties
-	this->movementSpeed = 1.f;
-	this->direction = sf::Vector2f(-2.f, 0.5);
+	this->reset();
+	this->player1Score = 0;
+	this->player2Score = 0;
 }
 
 
@@ -34,6 +34,38 @@ Ball::~Ball() {
 
 
 // functions
+// generate random normalized vector
+sf::Vector2f Ball::generateRandomNormalizedVector()
+{
+
+	// Seed the random number generator with the current time
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+	// Generate random float values between -1 and 1 for a 2D vector
+	float x = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX) * 2.0f - 1.0f;
+	float y = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX) * 2.0f - 1.0f;
+
+	// Display the original vector
+	std::cout << "Original Vector: (" << x << ", " << y << ")" << std::endl;
+
+	// Calculate the magnitude of the vector
+	float magnitude = std::sqrt(x * x + y * y);
+
+	// Normalize the vector
+	x /= magnitude;
+	y /= magnitude;
+	// Create a vector from the random values
+	sf::Vector2f randomVector(x, y);
+	return randomVector;
+}
+
+void Ball::reset() {
+	this->shape.setPosition(400.f, 300.f);
+	this->direction = generateRandomNormalizedVector();
+    this->movementSpeed = 2.f;
+}
+
+
 
 void Ball::updatewindowboundscollision(const sf::RenderTarget* target)
 {
@@ -45,8 +77,16 @@ void Ball::updatewindowboundscollision(const sf::RenderTarget* target)
 	{
 		this->direction.y = -this->direction.y;
 	}
-
-
+	if (ballBounds.left <= 0.f)
+	{
+		this->reset();
+		this->player2Score += 1;
+	}
+	if (ballBounds.left +ballBounds.width >= target->getSize().x)
+	{
+		this->reset();
+		this->player1Score += 1;
+	}
 }
 
 void Ball::update(const sf::RenderTarget* target) {

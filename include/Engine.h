@@ -11,6 +11,7 @@
 #include <Paddle.h>
 #include <PlayerPaddle.h>
 #include <PaddleAI.h>
+#include <PlayerPaddle_2.h>
 
 class Engine
 {
@@ -23,6 +24,7 @@ private:
 	//game objects
 
 	PlayerPaddle playerPaddle_1;
+	PlayerPaddle_2 playerPaddle_2;
 	PaddleAI paddleAI;
 	Ball ball;
 
