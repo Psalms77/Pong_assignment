@@ -70,7 +70,7 @@ void UIClass::render(sf::RenderTarget* target, int i)
 	else
 	{
 		target->draw(this->p1score);
-		target->draw(this->p2score);	
+		target->draw(this->p2score);
 	}
 
 
