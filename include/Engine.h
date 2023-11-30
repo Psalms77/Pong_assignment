@@ -25,6 +25,10 @@ private:
 	bool isSinglePlayer;
 	bool isMultiPlayer;
 	bool isStartScene;
+	bool isPaused;
+
+	float prePauseBallSpeed;
+
 
 	sf::Font font;
 	//game objects

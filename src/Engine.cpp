@@ -8,8 +8,10 @@ void Engine::initVariables() {
 	this->isSinglePlayer = false;
 	this->isMultiPlayer = false;
 	this->isStartScene = true;
-
+	this->isPaused = false;
+	this->prePauseBallSpeed = 0.f;
 	this->window = nullptr;
+	
 }
 void Engine::initWindow() {
 
@@ -61,6 +63,22 @@ void Engine::pollEvents() {
 				this->window->close();
 			}
 			break;
+		case sf::Event::KeyReleased:
+			if (this->ev.key.code == sf::Keyboard::P)
+			{
+				this->isPaused = !this->isPaused;
+				std::cout << "ispaused: ( " << isPaused << ")" << std::endl;
+				if (!isStartScene && isPaused)
+				{
+					//record pre pause info
+					this->prePauseBallSpeed = this->ball.movementSpeed;
+					this->ball.movementSpeed = 0.f;
+				}
+				else if (!isPaused) {
+					this->ball.movementSpeed = this->prePauseBallSpeed;
+				}
+			}
+			break;
 
 		}
 	}
@@ -72,7 +90,7 @@ void Engine::update() {
 	dt = dtClock.restart().asSeconds();
 
 	this->pollEvents();
-	
+
 	if (isStartScene)
 	{
 		//this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
@@ -87,7 +105,7 @@ void Engine::update() {
 			isMultiPlayer = true;
 		}
 	}
-	else if (isSinglePlayer)
+	else if (isSinglePlayer && !isPaused)
 	{
 		this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
 		this->playerPaddle_1.update(this->window);
@@ -99,7 +117,7 @@ void Engine::update() {
 			this->ball.movementSpeed += 0.25f;
 		}
 	}
-	else if (isMultiPlayer)
+	else if (isMultiPlayer && !isPaused)
 	{
 		this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
 		this->playerPaddle_1.update(this->window);
