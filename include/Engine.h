@@ -27,9 +27,11 @@ private:
 	bool isStartScene;
 	bool isPaused;
 
+	bool isResetting;
 	float prePauseBallSpeed;
 
-
+	int player1Score;
+	int player2Score;
 	sf::Font font;
 	//game objects
 
@@ -41,6 +43,9 @@ private:
 	// clock
 	float dt;
 	sf::Clock dtClock;
+	float resettingTime;
+	float resettingTimer;
+
 
 	// ui
 	UIClass ui;
@@ -53,6 +58,7 @@ private:
 	void initVariables();
 	void initWindow();
 	bool paddleBallCollision(const sf::CircleShape& ball, const sf::RectangleShape& paddle);
+	void updatewindowboundscollision(const sf::RenderTarget* target, const sf::CircleShape& ball);
 
 
 public:
@@ -61,6 +67,7 @@ public:
 	const bool isRunning() const;
 
 	//functions
+
 	void pollEvents();
 	void update();
 	void render();

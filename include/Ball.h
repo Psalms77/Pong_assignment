@@ -40,7 +40,7 @@ class Ball
 		//functions
 		void reset();
 		sf::Vector2f generateRandomNormalizedVector();
-		void updatewindowboundscollision(const sf::RenderTarget* target);
+
 		void update(const sf::RenderTarget* target);
 		void render(sf::RenderTarget* target);
 };

@@ -67,31 +67,9 @@ void Ball::reset() {
 
 
 
-void Ball::updatewindowboundscollision(const sf::RenderTarget* target)
-{
-	// bouncing off window top and bottom bounds
-
-	sf::FloatRect ballBounds = this->shape.getGlobalBounds();
-
-	if (ballBounds.top <= 0.f || ballBounds.top + ballBounds.height >= target->getSize().y)
-	{
-		this->direction.y = -this->direction.y;
-	}
-	if (ballBounds.left <= 0.f)
-	{
-		this->reset();
-		this->player2Score += 1;
-	}
-	if (ballBounds.left +ballBounds.width >= target->getSize().x)
-	{
-		this->reset();
-		this->player1Score += 1;
-	}
-}
-
 void Ball::update(const sf::RenderTarget* target) {
 
-	this->updatewindowboundscollision(target);
+	//this->updatewindowboundscollision(target);
 
 
 

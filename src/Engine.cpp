@@ -11,7 +11,11 @@ void Engine::initVariables() {
 	this->isPaused = false;
 	this->prePauseBallSpeed = 0.f;
 	this->window = nullptr;
-	
+	this->player1Score = 0;
+	this->player2Score = 0;
+	this->isResetting = false;
+	this->resettingTime = 1.5f;
+	this->resettingTimer = 0.f;
 }
 void Engine::initWindow() {
 
@@ -27,6 +31,30 @@ bool Engine::paddleBallCollision(const sf::CircleShape& ball, const sf::Rectangl
 	sf::FloatRect ballBounds = ball.getGlobalBounds();
 	sf::FloatRect paddleBounds = paddle.getGlobalBounds();
 	return ballBounds.intersects(paddleBounds);
+}
+
+void Engine::updatewindowboundscollision(const sf::RenderTarget* target, const sf::CircleShape& b)
+{	// bouncing off window top and bottom bounds
+
+	sf::FloatRect ballBounds = b.getGlobalBounds();
+
+	if (ballBounds.top <= 0.f || ballBounds.top + ballBounds.height >= target->getSize().y)
+	{
+		this->ball.direction.y = -this->ball.direction.y;
+		//this->direction.y = -this->direction.y;
+	}
+	if (ballBounds.left <= 0.f)
+	{
+		this->isResetting = true;
+		this->ball.shape.setPosition(this->window->getSize().x / 2.f, this->window->getSize().y / 2.f);
+		this->player2Score += 1;
+	}
+	if (ballBounds.left + ballBounds.width >= target->getSize().x)
+	{
+		this->isResetting = true;
+		this->ball.shape.setPosition(this->window->getSize().x / 2.f, this->window->getSize().y / 2.f);
+		this->player1Score += 1;
+	}
 }
 
 
@@ -108,27 +136,72 @@ void Engine::update() {
 	}
 	else if (isSinglePlayer && !isPaused)
 	{
-		this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
-		this->playerPaddle_1.update(this->window);
-		this->paddleAI.update(this->window, this->ball.shape, dt);
-		this->ball.update(this->window);
-		if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->paddleAI.shape))
+		this->ui.update(this->window, this->player1Score, this->player2Score);
+		this->updatewindowboundscollision(this->window, this->ball.shape);
+		if (this->isResetting)
 		{
-			this->ball.direction.x = -this->ball.direction.x;
-			this->ball.movementSpeed += 0.25f;
+			this->resettingTimer += dt;
+
+			if (this->resettingTimer>=1.f)
+			{
+				this->ball.shape.setPosition(this->window->getSize().x / 2.f, this->window->getSize().y / 2.f);
+			}
+
+			if (this->resettingTimer >= this->resettingTime)
+			{
+				this->isResetting = false;
+				this->resettingTimer = 0.f;
+				this->ball.reset();
+			}
 		}
+		else
+		{
+			
+			this->playerPaddle_1.update(this->window);
+			this->paddleAI.update(this->window, this->ball.shape, dt);
+			this->ball.update(this->window);
+			if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->paddleAI.shape))
+			{
+				this->ball.direction.x = -this->ball.direction.x;
+				this->ball.movementSpeed += 0.25f;
+			}			
+		}
+
+
 	}
 	else if (isMultiPlayer && !isPaused)
 	{
-		this->ui.update(this->window, this->ball.player1Score, this->ball.player2Score);
-		this->playerPaddle_1.update(this->window);
-		this->playerPaddle_2.update(this->window);
-		this->ball.update(this->window);
-		if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->playerPaddle_2.shape))
+		this->ui.update(this->window, this->player1Score, this->player2Score);
+		this->updatewindowboundscollision(this->window, this->ball.shape);
+		if (this->isResetting)
 		{
-			this->ball.direction.x = -this->ball.direction.x;
-			this->ball.movementSpeed += 0.25f;
+			this->resettingTimer += dt;
+
+			if (this->resettingTimer >= 1.f)
+			{
+				this->ball.shape.setPosition(this->window->getSize().x / 2.f, this->window->getSize().y / 2.f);
+			}
+
+			if (this->resettingTimer >= this->resettingTime)
+			{
+				this->isResetting = false;
+				this->resettingTimer = 0.f;
+				this->ball.reset();
+			}
 		}
+		else
+		{
+			
+			this->playerPaddle_1.update(this->window);
+			this->playerPaddle_2.update(this->window);
+			this->ball.update(this->window);
+			if (this->paddleBallCollision(this->ball.shape, this->playerPaddle_1.shape) || this->paddleBallCollision(this->ball.shape, this->playerPaddle_2.shape))
+			{
+				this->ball.direction.x = -this->ball.direction.x;
+				this->ball.movementSpeed += 0.25f;
+			}			
+		}
+
 	}
 
 }
@@ -147,17 +220,38 @@ void Engine::render() {
 	}
 	else if (isSinglePlayer)
 	{
-		this->ui.render(this->window, 1);
+		if (this->isResetting && this->resettingTimer < 0.5f)
+		{
+
+		}
+		else if (this->isResetting && this->resettingTimer > 0.5f && this->resettingTimer > 1.f) {
+			this->ui.render(this->window, 1);
+		}
+		else
+		{
+			this->ui.render(this->window, 1);
+			this->ball.render(this->window);
+		}
 		this->playerPaddle_1.render(this->window);
 		this->paddleAI.render(this->window);
-		this->ball.render(this->window);
+
 	}
 	else if (isMultiPlayer)
 	{
-		this->ui.render(this->window, 2);
+		if (this->isResetting && this->resettingTimer < 0.5f)
+		{
+
+		}
+		else if (this->isResetting && this->resettingTimer > 0.5f && this->resettingTimer > 1.f) {
+			this->ui.render(this->window, 1);
+		}
+		else
+		{
+			this->ui.render(this->window, 1);
+			this->ball.render(this->window);
+		}
 		this->playerPaddle_1.render(this->window);
 		this->playerPaddle_2.render(this->window);
-		this->ball.render(this->window);
 	}
 	this->window->display();
 
