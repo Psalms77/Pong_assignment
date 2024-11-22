@@ -1,5 +1,10 @@
 # Pong_assignment
 
+This is a reamke of PONG using SFML. 
+
+
+
+
 Reminder:
 
 ##Make sure to put the right sfml ".dll" files in the debug and release folder. 
